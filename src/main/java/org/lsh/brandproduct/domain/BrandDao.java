@@ -6,6 +6,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
+/*
+ * 브랜드 정보를 담당하는 DAO 클래스
+ * 외부에서 API를 통해 CRUD 가능
+ */
 @Component
 public class BrandDao {
 	private final List<BrandModel> brandList;

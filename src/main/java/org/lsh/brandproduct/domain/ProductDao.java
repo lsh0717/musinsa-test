@@ -6,6 +6,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
+/*
+ * 상품 정보를 담당하는 DAO 클래스
+ * 상품 품절은 없음. 외부에서 API를 통해 CRUD 가능
+ */
 @Component
 public class ProductDao {
 	private final List<ProductModel> productModelList;
