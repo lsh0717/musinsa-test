@@ -3,7 +3,9 @@ package org.lsh.brandproduct.domain;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -48,6 +50,18 @@ public class ProductDao {
 		return productModelList.stream()
 				.filter(productModel -> productModel.category().equals(productCategory))
 				.min(Comparator.comparing(ProductModel::price));
+	}
+
+	public List<ProductModel> findAllLowerPriceProductOnEachCategoryByBrandName(String brandName) {
+		Map<ProductCategory, List<ProductModel>> productCategoryListMap = productModelList.stream()
+			.filter(productModel -> productModel.brandName().equals(brandName))
+			.collect(Collectors.groupingBy(ProductModel::category));
+		return productCategoryListMap.values().stream()
+			.map(productListOnSameCategory -> productListOnSameCategory.stream()
+				.min(Comparator.comparing(ProductModel::price)))
+			.filter(Optional::isPresent)
+			.map(Optional::get)
+			.toList();
 	}
 
 	public ProductDao() {

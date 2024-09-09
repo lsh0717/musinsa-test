@@ -1,6 +1,7 @@
 package org.lsh.brandproduct.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,12 @@ public class BrandDao {
 	public void delete(String brandName) {
 		this.findByName(brandName)
 			.ifPresent(brandList::remove);
+	}
+
+
+	public List<BrandModel> findAll() {
+		// find All 일 때는 read only list로 주기
+		return Collections.unmodifiableList(brandList);
 	}
 
 	public Optional<BrandModel> findByName(String name) {

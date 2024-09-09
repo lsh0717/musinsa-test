@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(staticName = "of")
-public class PriceProductRs {
+public class LowestPriceProductRs {
 	private List<ProductDto> productList;
 	private Long totalPrice;
 }
