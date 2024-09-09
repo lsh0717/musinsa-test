@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.lsh.brandproduct.api.rqrs.LowerPriceBrandRs;
 import org.lsh.brandproduct.api.rqrs.LowestPriceProductRs;
+import org.lsh.brandproduct.api.rqrs.PriceCompareRs;
+import org.lsh.brandproduct.domain.dto.BrandPriceDto;
 import org.lsh.brandproduct.domain.dto.CategoryItemDto;
 import org.lsh.brandproduct.domain.dto.ProductDto;
 import org.lsh.brandproduct.domain.dto.BrandProductsAndTotalPriceDto;
@@ -56,5 +58,19 @@ public class ProductService {
 			.map(ProductModel::price)
 			.reduce(0, Integer::sum)
 			.longValue();
+	}
+
+	public PriceCompareRs getPriceCompare(String categoryName) {
+		ProductCategory productCategory = ProductCategory.valueOf(categoryName);
+
+		ProductModel lowerPriceProduct = productDao.findLowerPriceProductByCategory(productCategory)
+			.orElseThrow(() -> new IllegalArgumentException("해당 카테고리에 상품이 없습니다."));
+		ProductModel higherPriceProduct = productDao.findHigherPriceProductByCategory(productCategory)
+			.orElseThrow(() -> new IllegalArgumentException("해당 카테고리에 상품이 없습니다."));
+
+		if (lowerPriceProduct.equals(higherPriceProduct)) {
+			higherPriceProduct = null;
+		}
+		return PriceCompareRs.of(categoryName, BrandPriceDto.from(lowerPriceProduct), BrandPriceDto.from(higherPriceProduct));
 	}
 }

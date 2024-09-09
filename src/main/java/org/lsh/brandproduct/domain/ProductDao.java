@@ -52,6 +52,12 @@ public class ProductDao {
 				.min(Comparator.comparing(ProductModel::price));
 	}
 
+	public Optional<ProductModel> findHigherPriceProductByCategory(ProductCategory productCategory) {
+		return productModelList.stream()
+			.filter(productModel -> productModel.category().equals(productCategory))
+			.max(Comparator.comparing(ProductModel::price));
+	}
+
 	public List<ProductModel> findAllLowerPriceProductOnEachCategoryByBrandName(String brandName) {
 		Map<ProductCategory, List<ProductModel>> productCategoryListMap = productModelList.stream()
 			.filter(productModel -> productModel.brandName().equals(brandName))

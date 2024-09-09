@@ -2,8 +2,10 @@ package org.lsh.brandproduct.api;
 
 import org.lsh.brandproduct.api.rqrs.LowerPriceBrandRs;
 import org.lsh.brandproduct.api.rqrs.LowestPriceProductRs;
+import org.lsh.brandproduct.api.rqrs.PriceCompareRs;
 import org.lsh.brandproduct.domain.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -31,5 +33,14 @@ public class ProductController {
 	@GetMapping("/api/product/lowest-price-brand")
 	public LowerPriceBrandRs getLowestPriceBrand() {
 		return productService.getLowestPriceBrand();
+	}
+
+	/*
+	카테고리 이름으로 최저, 최고 가격 브랜드와 상품 가격을 조회하는 API
+	API의 역할 : 가격 비교, 카테고리 이름을 받아서 해당 카테고리의 최저, 최고 가격 브랜드와 상품 가격을 제공
+	 */
+	@GetMapping("/api/product/price-compare")
+	public PriceCompareRs getPriceCompare(@RequestParam String categoryName) {
+		return productService.getPriceCompare(categoryName);
 	}
 }
