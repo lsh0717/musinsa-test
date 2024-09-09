@@ -19,7 +19,7 @@ public class ProductController {
 	API의 역할 : 한 카테고리 내에서 가성비 있으면서 멋스러운 제품을 찾는 고객들에게 최저 가격을 제공
                 근데 총액은 왜 필요할까? 묶음 할인 같은 것을 제공하는 걸까?
 	*/
-	@GetMapping("/lowest-price-by-category")
+	@GetMapping("/api/product/lowest-price-by-category")
 	public PriceProductRs getLowestPriceBrandByCategory() {
 		return productService.getLowestPriceBrandByCategory();
 	}
