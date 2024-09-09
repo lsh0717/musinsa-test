@@ -40,7 +40,7 @@ public class ProductController {
 	API의 역할 : 가격 비교, 카테고리 이름을 받아서 해당 카테고리의 최저, 최고 가격 브랜드와 상품 가격을 제공
 	 */
 	@GetMapping("/api/product/price-compare")
-	public PriceCompareRs getPriceCompare(@RequestParam String categoryName) {
-		return productService.getPriceCompare(categoryName);
+	public PriceCompareRs getPriceCompare(@RequestParam String category) {
+		return productService.getPriceCompare(category);
 	}
 }

@@ -60,8 +60,8 @@ public class ProductService {
 			.longValue();
 	}
 
-	public PriceCompareRs getPriceCompare(String categoryName) {
-		ProductCategory productCategory = ProductCategory.valueOf(categoryName);
+	public PriceCompareRs getPriceCompare(String category) {
+		ProductCategory productCategory = ProductCategory.valueOf(category);
 
 		ProductModel lowerPriceProduct = productDao.findLowerPriceProductByCategory(productCategory)
 			.orElseThrow(() -> new IllegalArgumentException("해당 카테고리에 상품이 없습니다."));
@@ -71,6 +71,6 @@ public class ProductService {
 		if (lowerPriceProduct.equals(higherPriceProduct)) {
 			higherPriceProduct = null;
 		}
-		return PriceCompareRs.of(categoryName, BrandPriceDto.from(lowerPriceProduct), BrandPriceDto.from(higherPriceProduct));
+		return PriceCompareRs.of(productCategory.getCategoryName(), BrandPriceDto.from(lowerPriceProduct), BrandPriceDto.from(higherPriceProduct));
 	}
 }
