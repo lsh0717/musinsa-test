@@ -1,5 +1,7 @@
 package org.lsh.brandproduct.global.exception;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +15,13 @@ public class ExceptionAdvice {
 	@ResponseBody
 	public ResponseEntity<ExceptionRs> handleIllegalArgumentException(IllegalArgumentException exception) {
 		ExceptionRs exceptionRs = ExceptionRs.of("Illegal Argument", exception.getMessage());
+		return ResponseEntity.badRequest().body(exceptionRs);
+	}
+
+	@ExceptionHandler(NoSuchElementException.class)
+	@ResponseBody
+	public ResponseEntity<ExceptionRs> handleNoSuchElementException(NoSuchElementException exception) {
+		ExceptionRs exceptionRs = ExceptionRs.of("No Such Element", exception.getMessage());
 		return ResponseEntity.badRequest().body(exceptionRs);
 	}
 
