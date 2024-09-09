@@ -17,7 +17,7 @@ class BrandDaoTest {
 	@Test
 	void findByName_데이터_없을_때() {
 		BrandDao brandDao = new BrandDao();
-		Optional<BrandModel> brandModelOptional = brandDao.findByName("A");
+		Optional<BrandModel> brandModelOptional = brandDao.findByName("NO_DATA");
 		assertTrue(brandModelOptional.isEmpty());
 	}
 
