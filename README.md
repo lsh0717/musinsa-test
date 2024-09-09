@@ -6,18 +6,11 @@
     4. 운영자는 새로운 브랜드를 등록하고, 모든 브랜드의 상품을 추가, 변경, 삭제할 수 있어야 합니다
      
 ## 코드 빌드, 테스트, 실행 방법
+    - BrandProductApplication 실행
 
 ## 구현 방법
     - ProductDao, BrandDao에 add, find, update, delete 구현 (unit test 구현)
 
-## 기타 추가 정보
-
-
-
-
 ## Test (unit / Integration)
+    - ProductDaoTest, BrandDaoTest 구현
 
-[//]: # (로그 로깅)
-[//]: # (인증 및 권한)
-[//]: # (모니터링)
-[//]: # (CI/CD)
