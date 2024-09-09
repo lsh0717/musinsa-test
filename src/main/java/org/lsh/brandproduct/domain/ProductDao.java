@@ -1,6 +1,7 @@
 package org.lsh.brandproduct.domain;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,12 @@ public class ProductDao {
 		return productModelList.stream()
 				.filter(productModel -> productModel.brandName().equals(brandName) && productModel.category().equals(productCategory))
 				.findFirst();
+	}
+
+	public Optional<ProductModel> findLowerPriceProductByCategory(ProductCategory productCategory) {
+		return productModelList.stream()
+				.filter(productModel -> productModel.category().equals(productCategory))
+				.min(Comparator.comparing(ProductModel::price));
 	}
 
 	public ProductDao() {

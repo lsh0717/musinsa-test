@@ -1,4 +1,4 @@
 package org.lsh.brandproduct.domain;
 
-public record ProductModel(String brandName, ProductCategory category, double price, int quantity) {
+public record ProductModel(String brandName, ProductCategory category, Integer price, int quantity) {
 }

@@ -73,4 +73,15 @@ class ProductDaoTest {
 		Optional<ProductModel> product = productDao.findByBrandNameAndProductCategory(productModel.brandName(), productModel.category());
 		assertTrue(product.isEmpty());
 	}
+
+	@Test
+	void findLowerPriceProductByCategory() {
+		ProductDao productDao = new ProductDao();
+		ProductModel lowerPriceProduct = new ProductModel("LOWER_PRICE", ProductCategory.TOP, 0, 1);
+		productDao.add(lowerPriceProduct);
+
+		Optional<ProductModel> product = productDao.findLowerPriceProductByCategory(ProductCategory.TOP);
+		assertTrue(product.isPresent());
+		assertEquals(lowerPriceProduct, product.get());
+	}
 }
